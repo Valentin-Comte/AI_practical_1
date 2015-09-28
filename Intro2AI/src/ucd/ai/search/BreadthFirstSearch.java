@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import ucd.ai.search.Node;
 
+
+// Personal version of BreadthFirstSearch, a bit different from the pseudocode given
 public class BreadthFirstSearch {
 
 	private String goal;
@@ -20,6 +22,7 @@ public class BreadthFirstSearch {
 	public void process(){
 		System.out.println("Looking for the node: " + this.goal);
 		System.out.print("Search order: "+ this.queue.get(0).get(0).getName());
+
 		// Checking if the goal state is the start state
 		if(this.queue.get(0).get(0).getName().compareTo(this.goal)==0){
 			System.out.println("\nSUCCESS");
@@ -68,8 +71,8 @@ public class BreadthFirstSearch {
 		c.addChild(f);
 		c.addChild(g);
 		
-		BreadthFirstSearch Bfs = new BreadthFirstSearch("f", a);
-		Bfs.process();
+		BreadthFirstSearch bfs = new BreadthFirstSearch("f", a);
+		bfs.process();
 	}
 	
 }
