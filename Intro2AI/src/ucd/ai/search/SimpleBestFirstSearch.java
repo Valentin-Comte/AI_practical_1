@@ -1,6 +1,7 @@
 package ucd.ai.search;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -26,10 +27,40 @@ public class SimpleBestFirstSearch {
 		LinkedList<Board> closed = new LinkedList<Board>();
 		int levelCount = 0;
 		while (!open.isEmpty()) {
-			//Complete search algorithm here!!!!
+			Board firstElement = open.removeFirst();
+			firstElement.outputBoard();
+			if(firstElement.equals(goalBoard)){
+				System.out.println("SUCCESS: levelCount = " + levelCount);
+				return true;
+			}
+			else{
+				ArrayList<Board> children = firstElement.getChildren();
+				for(int i=0; i<children.size(); i++){
+					if(!boardInList(children.get(i), open) && !boardInList(children.get(i), closed)){
+						children.get(i).setHeuristicValue(
+								this.simpHeuristic.getHeuristicScore(children.get(i), heuristic));
+						children.get(i).setBoardLevel(levelCount+1);
+						open.add(children.get(i));
+					}
+				}
+				closed.add(firstElement);
+				Collections.sort(open);
+				levelCount++;
+			}
+		}
+		System.out.println("FAIL: the board could not be solved");
+		return false;
+	}
+	
+	public boolean boardInList(Board board, LinkedList<Board> list){
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).equals(board)){
+				return true;
+			}
 		}
 		return false;
 	}
+	
 	
 	public void generateGoalBoard() {
 		goalBoard = new Board();

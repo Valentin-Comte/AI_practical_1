@@ -1,4 +1,6 @@
 package ucd.ai.search;
+import java.lang.Math;
+import java.util.List;
 
 public class SimpleHeuristic {
 
@@ -52,8 +54,14 @@ public class SimpleHeuristic {
 	 * @param board
 	 */
 	public int generateDistanceHeuristic(Board board) {
-		//Complete this heuristic
-		return 0;
+		int counter = 0;
+		for (int x = 0; x < 3; x++) {//x loops through the x coordinates of the board
+			for (int y = 0; y < 3; y++) { //y loops through the y coordinates of the board
+				int coordinates[] = goalBoard.findTileCoordinates(board.getTile(x,y).getValue());
+				counter += (Math.abs(coordinates[0] - x) + Math.abs(coordinates[1] - y));
+			}
+		}
+		return counter;
 	}
 
 }

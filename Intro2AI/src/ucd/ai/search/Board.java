@@ -188,4 +188,18 @@ public class Board implements Comparable<Board>, Cloneable {
 	public void setTiles(List<Tile> tiles) {
 		this.tiles = tiles;
 	}
+	
+	public int[] findTileCoordinates(int value){
+		int coordinates[] = {-1,-1};
+		for (int x = 0; x < 3; x++) {//x loops through the x coordinates of the board
+			for (int y = 0; y < 3; y++) { //y loops through the y coordinates of the board
+				if (this.getTile(x, y).getValue() == value){
+					coordinates[0] = x;
+					coordinates[1] = y;
+					return coordinates;
+				}
+			}
+		}
+		return coordinates;
+	}
 }

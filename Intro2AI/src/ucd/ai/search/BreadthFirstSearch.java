@@ -35,19 +35,21 @@ public class BreadthFirstSearch {
 			ArrayList<Node> nodeChildren = this.queue.get(0).get(this.queue.get(0).size()-1).getChildren();
 			
 			for(int i=0; i < nodeChildren.size(); i++){
-				ArrayList<Node> newPath = new ArrayList<Node>(this.queue.get(0));
-				newPath.add(nodeChildren.get(i));
-				System.out.print(" " + nodeChildren.get(i).getName());
-	
-				if(nodeChildren.get(i).getName().compareTo(this.goal)==0){
-					System.out.println("\nSUCCESS");
-					System.out.print("The path to goal state is: ");
-					for(int j=0; j < newPath.size(); j++){
-						System.out.print(newPath.get(j).getName() + " ");
+				if(!this.queue.get(0).contains(nodeChildren.get(i))){
+					ArrayList<Node> newPath = new ArrayList<Node>(this.queue.get(0));
+					newPath.add(nodeChildren.get(i));
+					System.out.print(" " + nodeChildren.get(i).getName());
+		
+					if(nodeChildren.get(i).getName().compareTo(this.goal)==0){
+						System.out.println("\nSUCCESS");
+						System.out.print("The path to goal state is: ");
+						for(int j=0; j < newPath.size(); j++){
+							System.out.print(newPath.get(j).getName() + " ");
+						}
+						return;
 					}
-					return;
+					this.queue.add(newPath);
 				}
-				this.queue.add(newPath);
 			}
 			
 			this.queue.removeFirst();

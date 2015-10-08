@@ -5,9 +5,9 @@ public class RunPuzzle {
 	public static void main(String[] args) {
 		SimpleBestFirstSearch puzzle = new SimpleBestFirstSearch();
 		// puzzle.createRandomStart();
-		puzzle.createStartBoardMedium();
+		puzzle.createStartBoardWorst();
 		//change the 0 below to select different heuristic
-		puzzle.doSearch(0);
+		puzzle.doSearch(1);
 
 	}
 
